@@ -19,7 +19,7 @@ export default function App() {
         <MainTitle>Phonebook</MainTitle>
         <ContactForm />
         <Title>Contacts</Title>
-        {/* <ContactsFilter /> */}
+        <ContactsFilter />
         <ContactsList />
       </Box>
     )
