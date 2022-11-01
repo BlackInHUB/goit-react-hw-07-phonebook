@@ -20,6 +20,7 @@ const contactsSlice = createSlice({
     [fetchContacts.rejected]: rejectedCallback,
     [addContact.pending]: pendingCallback,
     [addContact.fulfilled]: (store, { payload }) => {
+      store.isLoading = false;
       store.items.push(payload);
     },
     [addContact.rejected]: rejectedCallback,

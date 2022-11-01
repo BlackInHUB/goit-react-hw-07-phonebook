@@ -3,12 +3,15 @@ import { MainTitle, Title } from './Contacts/Titles.styled';
 import ContactForm from "./Contacts/ContactForm/ContactForm";
 import { ContactsList } from './Contacts/ContactsList/ContactsList'
 import {ContactsFilter} from "./Contacts/ContactsFilter/ContactsFilter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchContacts } from "redux/operations";
+import { selectState } from "redux/selectors";
+import Loader from "./Loader/Loader";
 
 export default function App() {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const { isLoading, error } = useSelector(selectState);
 
   useEffect(() => {
       dispatch(fetchContacts())
@@ -20,7 +23,9 @@ export default function App() {
         <ContactForm />
         <Title>Contacts</Title>
         <ContactsFilter />
-        <ContactsList />
+        {isLoading && <Loader />}
+        {error && <p>Sorry, shit happens... Try again.</p>}
+        {!isLoading && !error && <ContactsList />}
       </Box>
     )
 };
