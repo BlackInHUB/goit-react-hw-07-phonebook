@@ -1,10 +1,10 @@
-import { nanoid } from "nanoid";
 import { useDispatch, useSelector } from "react-redux";
-import { addContact, getContacts } from "redux/phonebookSlice";
+import { selectContacts } from "redux/selectors";
+import { addContact } from "redux/operations";
 import { Form, FormLabel, FormInput, SubmitBtn } from "./ContactForm.styled";
 
 export default function ContactForm() {
-    const contacts = useSelector(getContacts)
+    const contacts = useSelector(selectContacts)
     const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
@@ -13,9 +13,8 @@ export default function ContactForm() {
         const form = e.currentTarget;
 
         const newContact = {
-            id: nanoid(),
             name: form.elements.name.value,
-            number: form.elements.number.value
+            phone: form.elements.number.value
         }
         
         for (let contact of contacts) {
